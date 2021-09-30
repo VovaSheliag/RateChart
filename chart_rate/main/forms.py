@@ -17,5 +17,11 @@ class RateSavingForm(forms.ModelForm):
             'date': DateInput()
         }
 
+    def clean(self):
+        super(RateSavingForm, self).clean()
 
+        date = self.cleaned_data['date']
+        if str(date).split('-')[0] < '1900':
+            self.add_error('date', 'Year should be higher or equal 01-01-1900')
+        return self.cleaned_data
 

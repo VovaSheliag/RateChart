@@ -23,29 +23,31 @@
         </div>
         <button type="submit" class="btn btn-light">Submit</button>
     </form>
+    <div class="position-absolute start-50 translate-middle" style="top: 160px; color: #dfebb2;">
     {{errors}}
+    </div>
 </div>
 
-<canvas id="myChart" class="bg-light" height="100"></canvas>
+<canvas id="myChart" class="bg-light" height="100"></canvas>  <!-- Create line chart -->  
 
 <script>
-    let date = [];
-    let rate = [];
-    '{% for i in date %}'
+    let date = [];  //Empty array to save dates from DB
+    let rate = []; // Empty arrat to save rates from DB 
+    '{% for i in date %}'  // Add rates and dates to arrays
     date.push('{{  i.date }}');
     rate.push('{{ i.ua_rate }}');
     '{% endfor %}'
-    let myChart = document.getElementById('myChart').getContext('2d');
+    let myChart = document.getElementById('myChart').getContext('2d'); 
 
     let rateChart = new Chart(myChart, {
     type: 'line',
-    data: {
-        labels: date,
+    data: {  // Settings of the line chart 
+        labels: date, // Date array 
         datasets: [{
             label: 'Rate chart',
-            data: rate,
+            data: rate, // Rate array 
             borderColor: [
-                'rgba(255, 99, 132, 1)'
+                'rgba(255, 99, 132, 1)'  // Red color 
             ],
             borderWidth: 2
         }]

@@ -18,9 +18,7 @@ class MainView(View):
         form = RateSavingForm(request.POST)
         date = RateHistory.objects.all()
         if form.is_valid():
-            stock = form.save(commit=False)
-            stock.user = request.user  # Save user into DB
-            stock.save()
+            form.save()
             return redirect('/')
         context = {
             'errors': form.errors,
